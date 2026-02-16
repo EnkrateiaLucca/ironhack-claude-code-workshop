@@ -1,0 +1,8 @@
+Create a Claude Code skill called "meeting-notes-summarizer"
+that takes raw meeting notes and outputs:
+1. Action items with owners
+2. Key decisions made
+3. Follow-up questions
+4. Summary paragraph
+
+Include a Python script that formats the output as markdown.

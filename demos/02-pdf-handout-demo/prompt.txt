@@ -1,0 +1,3 @@
+Create a PDF cheatsheet about "5 Essential Git Commands"
+Use my brand guidelines document for styling.
+Make it clean, scannable, and ready to share on social media.

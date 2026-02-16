@@ -1,0 +1,19 @@
+[
+  {
+    "question": "What is the optimal next interval when you partially recall information in spaced repetition?",
+    "answer": "30-50% (or 40-60%) of the interval you would use for perfect recall.<br><br>Key principle: <b>Shorter than success, longer than failure</b><br><br>Partial recall means storage strength is still there but retrieval strength has weakened, so don't penalize as harshly as complete forgetting.",
+    "source": "Bjork & Bjork (2011), Kornell & Bjork (2008)",
+    "category": "knowledge"
+  },
+  {
+    "question": "Why is partial recall (struggling to retrieve) actually beneficial for long-term learning?",
+    "answer": "Effortful retrieval produces <b>better long-term retention</b> than easy retrieval. This is called \"<b>desirable difficulty</b>\".<br><br>Struggling to retrieve (and eventually succeeding) strengthens the memory trace more than effortless recall. Partial recall indicates you're at an optimal difficulty level for learning.",
+    "source": "Pyc & Rawson (2009), Bjork & Bjork (2011)",
+    "category": "knowledge"
+  },
+  {
+    "question": "What are the key steps for triangle choke from closed guard?",
+    "answer": "1. Break opponent's posture<br>2. Angle off 45°<br>3. Pull arm across centerline<br>4. Kick leg over shoulder<br>5. Lock ankle behind knee<br>6. Squeeze knees together<br>7. Pull head down",
+    "category": "movement"
+  }
+]
