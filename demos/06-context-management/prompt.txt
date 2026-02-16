@@ -1,0 +1,10 @@
+--- DEMO: Show /cost before and after loading a big file ---
+
+Step 1: Run /cost to see current token usage
+Step 2: Ask Claude to read a large file (e.g. a research paper PDF)
+Step 3: Run /cost again to see the jump in token count
+Step 4: Run /compact to summarize and free up context
+Step 5: Run /cost one more time to show the reduction
+
+This demonstrates the "desk analogy" — context has a real cost,
+and managing it is key to getting great results.

@@ -1,4 +1,0 @@
-Create a CSV file with sample sales data for Q1 2025.
-Include columns: Date, Product, Quantity, Revenue, Region.
-Generate 20 rows of realistic sample data.
-Save it as sales-q1-2025.csv

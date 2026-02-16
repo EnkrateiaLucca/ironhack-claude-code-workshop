@@ -1,0 +1,3 @@
+Read the PDF file ./paper.pdf. Create a translated summary
+in Portuguese with the key findings, methodology, and conclusions.
+Save it as ./paper-summary-pt.md

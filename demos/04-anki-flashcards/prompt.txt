@@ -1,0 +1,3 @@
+Read my notes about prompt engineering in my vault.
+Create 10 Anki flashcards and save them as a CSV file
+I can import into Anki.

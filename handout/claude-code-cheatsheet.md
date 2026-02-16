@@ -1,215 +1,174 @@
-# Claude Code Cheatsheet
+# Claude Code Cheatsheet — Non-Coders Edition
 
-Quick reference guide for Claude Code — Anthropic's terminal-based AI agent.
+Quick reference for the Ironhack workshop: Claude Code for Non-Coders.
 
 ---
 
-## Installation
+## What is Claude Code?
+
+An AI agent that runs **in your terminal**. Unlike AI chats, it executes actions on your machine — creates files, reads documents, runs commands, and chains multi-step tasks.
 
 ```bash
-# Via npm (requires Node.js 18+)
-npm install -g @anthropic-ai/claude-code
-
-# Via Homebrew
-brew install claude-code
-
-# Launch
-claude
+claude          # Start Claude Code
 ```
 
-**Requirements:** Node.js 18+, Anthropic API key
-
 ---
 
-## Essential Commands
+## CLAUDE.md — Persistent Memory
 
-| Command | Description |
-|---------|-------------|
-| `/help` | Show all available commands |
-| `/clear` | Clear conversation context |
-| `/context` | Show context window usage |
-| `/compact` | Summarize conversation to reduce tokens |
-| `/settings` | Open settings menu |
-| `/doctor` | Diagnose configuration issues |
-| `/skills` | List available skills |
-| `/commands` | List custom commands |
-
----
-
-## Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+C` | Cancel current operation |
-| `Ctrl+D` | Exit Claude Code |
-| `Tab` | Autocomplete file paths |
-| `Up/Down` | Navigate command history |
-| `Ctrl+R` | Search command history |
-
----
-
-## CLAUDE.md Configuration
-
-### Global Config (`~/.claude/CLAUDE.md`)
+### Global: `~/.claude/CLAUDE.md`
 
 ```markdown
-# My Claude Configuration
+# About Me
+- My Obsidian vault: ~/Documents/obsidian-vault/
+- My Anki database: ~/Library/Application Support/Anki2/
+- My automations: ~/automations/
 
-- My notes are at: ~/obsidian-vault/
-- Automation scripts go in: ~/Desktop/automated/
-- Use uv for Python scripts with inline metadata
-- Ask before deleting multiple files
+# Preferences
+- Use markdown formatting for notes
+- Use descriptive filenames with dates
 ```
 
-### Project Config (`./CLAUDE.md`)
+### Per-Project: `./CLAUDE.md`
 
 ```markdown
-# Project: My App
-
-## Tech Stack
-- React + TypeScript
-- Tailwind CSS
-
-## Rules
-- Use functional components
-- Run tests before committing
+# Project: IronHack Workshop
+- Output files go in ./output/
+- Use Portuguese for student materials
 ```
+
+**Rule:** Every time you repeat instructions, add them to CLAUDE.md instead.
 
 ---
 
-## Skills vs Commands
+## Context Management — The Golden Rule
 
-| Feature | Commands | Skills |
-|---------|----------|--------|
-| Location | `~/.claude/commands/` | `~/.claude/skills/` |
-| Format | Single `.md` file | Folder with resources |
-| Complexity | Simple prompts | Complex workflows |
-| Invoke | `/command-name` | Auto-detected or `/skill-name` |
+**One task, one session, one focus.**
+
+### The Desk Analogy
+
+Your context window (~200K tokens) is like a desk. Everything takes space: your messages, Claude's responses, files read, conversation history. Overload it and things fall off.
+
+### Bad vs Good Prompting
+
+```
+BAD:  Read all 200 notes, summarize them, create flashcards,
+      then organize by difficulty. (all in one session)
+
+GOOD: Session 1 → Scout filenames
+      Session 2 → Read specific files + summarize
+      Session 3 → Create flashcards from summary file
+```
+
+Connect sessions through **files**, not conversation history.
+
+### Instruction Compression
+
+1. **Front-load in CLAUDE.md** — write preferences once, not every prompt
+2. **Use reference files** — `"Follow ./brand-guidelines.md"` instead of pasting rules
+3. **Create commands** — `/anki-cards [URL]` replaces a paragraph of instructions
+4. **Be specific, not exhaustive** — trust the configuration
 
 ---
 
-## Skill Folder Structure
+## Context Commands
 
-```
-my-skill/
-├── SKILL.md          # Required: Instructions
-├── scripts/          # Optional: Python/Bash
-├── references/       # Optional: Docs
-└── assets/           # Optional: Templates
-```
-
-### SKILL.md Template
-
-```yaml
----
-name: my-skill
-description: What this skill does
----
-
-# My Skill
-
-## When to Use
-Use when the user asks to...
-
-## How to Execute
-1. Step one
-2. Step two
-3. Run scripts/process.py
-```
+| Action | Command |
+|--------|---------|
+| Check token usage | `/cost` |
+| Clear conversation | `/clear` |
+| Compact context | `/compact` |
+| Start fresh | Exit + `claude` |
 
 ---
 
-## Top Productivity Prompts
+## Skills & Commands
 
-### Generate Spreadsheet
-```
-Create a CSV with [columns] containing
-[number] rows of [type of data].
-Save as [filename].csv
-```
+### Custom Commands (simple)
 
-### Create PDF Handout
-```
-Create a PDF cheatsheet about [topic].
-Make it scannable with clear sections.
+Save a `.md` file in `~/.claude/commands/`:
+
+```markdown
+# /anki-cards
+Create Anki flashcards from this content.
+Output: CSV with Front, Back, Source fields.
+Rules: 10-15 cards, clear questions, include sources.
 ```
 
-### Generate Presentation
+Invoke: `/anki-cards [URL or content]`
+
+### Skills (complex)
+
 ```
-Create a [N]-slide Remark.js presentation
-about [topic] with speaker notes.
+~/.claude/skills/my-skill/
+├── SKILL.md      ← instructions (required)
+├── scripts/      ← executable code
+├── references/   ← documentation
+└── assets/       ← templates, images
 ```
 
-### Research with Citations
-```
-Create a research report about [topic]
-using these sources: [URLs]
-Include text fragment links for verification.
-```
+### Comparison
 
-### Summarize Notes
-```
-Review my notes in [folder] and create
-a summary with backlinks to sources.
-```
+| | Commands | Skills |
+|---|---|---|
+| Complexity | Simple prompt | Multi-file workflow |
+| Setup | One .md file | Folder + SKILL.md |
+| Use case | Quick shortcuts | Deterministic workflows |
 
 ---
 
-## MCP Servers
+## Workshop Demo Prompts
 
-Model Context Protocol enables external tool access.
-
-### Google Calendar Setup
-1. Create Google Cloud project
-2. Enable Calendar API
-3. Create OAuth credentials
-4. Configure in Claude settings
-
-### Common MCP Operations
+**First Task:**
 ```
-Show my calendar for this week
-Schedule a meeting tomorrow at 2pm
-Find an open slot for a 30-min call
+Create a markdown file called "meeting-notes.md" with today's date,
+sections for Attendees, Agenda, Discussion, Action Items.
+```
+
+**Fetch & Summarize:**
+```
+Fetch https://arxiv.org/abs/2503.10622 and create a summary
+note with the key findings.
+```
+
+**Translate Paper:**
+```
+Read ./paper.pdf. Translate to Portuguese with key findings,
+methodology, conclusions. Save as paper-summary-pt.md
+```
+
+**Anki Flashcards:**
+```
+Read my notes about prompt engineering. Create 10 Anki
+flashcards as a CSV file.
+```
+
+**Create a Skill (meta!):**
+```
+Create a skill that translates PDF papers to Portuguese.
+Put it in .claude/skills/translate-paper/
 ```
 
 ---
 
 ## Best Practices
 
-1. **Build CLAUDE.md gradually** — Add instructions as you discover patterns
-
-2. **Use skills for repeated tasks** — If you do it 3+ times, make a skill
-
-3. **Verify AI outputs** — Use citations for fact-checking
-
-4. **Multiple instances** — Keep different tasks in separate sessions
-
-5. **Check community first** — Don't reinvent existing skills
-
-6. **Context management** — Use `/compact` when context gets large
+1. **Start simple** — build complexity gradually
+2. **Build CLAUDE.md iteratively** — add as you discover patterns
+3. **One task, one session** — connect through files, not history
+4. **Verify outputs** — always fact-check AI-generated content
+5. **3x rule** — if you do it 3+ times, make a command or skill
+6. **Check community first** — github.com/anthropics/awesome-claude-code
 
 ---
 
 ## Resources
 
-- **Docs:** docs.anthropic.com/claude-code
+- **Docs:** docs.anthropic.com/en/docs/claude-code
 - **GitHub:** github.com/anthropics/claude-code
-- **Skills:** github.com/anthropics/awesome-claude-code
-- **Remark.js:** remarkjs.com
-- **Deep Dive:** hanchung.dev/claude-skills-deep-dive
-
----
-
-## Quick Start Workflow
-
-```
-1. Install: npm install -g @anthropic-ai/claude-code
-2. Launch: claude
-3. Try: "Create a simple todo list as a CSV file"
-4. Explore: /help
-5. Configure: Create ~/.claude/CLAUDE.md
-6. Extend: Install skills from awesome-claude-code
-```
+- **Community Skills:** github.com/anthropics/awesome-claude-code
+- **Skills Deep Dive:** hanchung.dev/claude-skills-deep-dive
+- **Course:** automatalearninglab.thinkific.com
 
 ---
 

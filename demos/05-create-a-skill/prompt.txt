@@ -1,0 +1,3 @@
+Create a skill that takes a PDF research paper, extracts the key
+findings, translates them to Portuguese, and saves the output as
+a structured markdown file. Put the skill in .claude/skills/translate-paper/

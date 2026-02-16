@@ -1,367 +1,369 @@
-# Claude Code for Productivity
+# Claude Code for Non-Coders: Your First AI Personal Assistant
 
-**Ironhack Workshop | 45 Minutes**
+This is it!!! Your first real taste of an **AI agent that lives on your machine**. You're here to learn how Claude Code can make you insanely productive — even if you've never written a line of code.
 
-> Beyond coding: Using Claude Code as your AI-powered productivity assistant for spreadsheets, PDFs, presentations, and custom workflows.
+*— But wait, isn't Claude Code a coding tool?*
 
----
+Yes. And no. Claude Code is marketed as a coding agent, but it's really a **general-purpose AI assistant** that happens to live in your terminal. It can read your files, create documents, organize your notes, build presentations, and automate workflows — all through natural language.
 
-## Workshop Overview
+And y'all like "termiwhaaaat?". Yes, the terminal. That black screen with text that hackers use in movies. Except now **you're** the hacker.
 
-| Duration | Audience | Prerequisites |
-|----------|----------|---------------|
-| 45 min | Developers, technical learners | Terminal basics, curiosity |
+Think of it this way: Claude Code is like having a brilliant intern sitting next to you, except this intern can read 200 pages in seconds, never forgets your preferences, and works at the speed of thought.
 
-**What you'll learn:**
-- How Claude Code works as a terminal-based AI agent
-- Creating spreadsheets, PDFs, and presentations with natural language
-- Building reusable skills and commands
-- Practical workflows for knowledge work
+Claude Code brings in:
 
-**What you'll take home:**
-- Example skills ready to use
-- Cheatsheet PDF
-- Demo prompts to try yourself
+- **The right mental model** for working with AI agents — you stop thinking of AI as "a chatbot" and start thinking of it as "a colleague that executes"
+- **Transferable skills** — prompt engineering, context management, workflow design — these apply to every AI tool you'll ever use, not just Claude Code
+
+Sit back, relax, and enjoy your lesson!
 
 ---
 
-## Table of Contents
+# Prerequisites
 
-1. [Quick Claude Code Overview](#section-1-quick-claude-code-overview) (5 min)
-2. [Productivity Tasks Demo](#section-2-productivity-tasks-demo) (15 min)
-3. [Claude Code Skills Deep Dive](#section-3-claude-code-skills-deep-dive) (15 min)
-4. [Practical Workflows & Wrap-up](#section-4-practical-workflows--wrap-up) (10 min)
+Before we begin, make sure you have:
+
+- A laptop with a terminal (macOS Terminal, Windows PowerShell/WSL, or Linux)
+- Claude Code installed → [installation guide](https://docs.anthropic.com/en/docs/claude-code)
+- A valid Anthropic API key or Claude Pro/Max subscription
+- (Optional) An [Obsidian](https://obsidian.md/) vault or any markdown notes folder
+- (Optional) [Anki](https://apps.ankiweb.net/) installed for the flashcard exercises
 
 ---
 
-# Section 1: Quick Claude Code Overview
+# What is Claude Code?
 
-**Time: 5 minutes**
+Claude Code is an AI assistant that runs **inside your terminal**. Unlike ChatGPT or Claude.ai (which give you text in a browser window), Claude Code can actually **do things on your machine** — create files, read your documents, run commands, organize folders, and chain complex multi-step tasks together.
 
-## What is Claude Code?
-
-Claude Code is Anthropic's **agentic coding tool** that lives in your terminal. Unlike chat interfaces, it can actually **do things** on your machine:
-
-- Read and write files
-- Execute commands
-- Browse the web
-- Manage your calendar (via MCP)
-- Create documents, spreadsheets, presentations
-
-[Screenshot: Claude Code terminal interface showing a conversation]
-
-> **Key Insight:** Claude Code is marketed as a coding assistant, but it's really a **general-purpose AI agent** that happens to be exceptionally good at coding.
-
-## Installation
+You start it by typing one word:
 
 ```bash
-# Install via npm (requires Node.js)
-npm install -g @anthropic-ai/claude-code
-
-# Or via Homebrew
-brew install claude-code
-
-# Launch in any folder
 claude
 ```
 
-After installation, simply type `claude` in your terminal to start a session.
+From there, you just talk to it:
 
-## The CLAUDE.md Configuration System
+```
+"Read this PDF and summarize the key points into a markdown file"
+"Create a folder structure for my new project"
+"Find all notes in my vault about machine learning and summarize them"
+```
 
-One of Claude Code's most powerful features is the **CLAUDE.md configuration file** — Claude's persistent memory.
+Claude Code asks for your permission before executing actions. You always stay in control. (Unless you go full YOLO mode — we'll get to that later)
 
-### Global Configuration (`~/.claude/CLAUDE.md`)
+### Why Claude Code instead of a regular AI chat?
 
-Instructions that apply **every time** you run Claude Code:
+The key difference is **agency**. A chat gives you text. Claude Code gives you **action**.
+
+| Regular AI Chat | Claude Code |
+|---|---|
+| Generates text in a browser | Executes actions on your machine |
+| You copy-paste the output | Claude saves the file directly |
+| One response at a time | Chains multiple steps automatically |
+| Forgets everything between sessions | Remembers your preferences (CLAUDE.md) |
+
+It reads your files, creates new ones, runs scripts, and chains multiple steps together. It turns conversation into execution.
+
+### Quick Command Recap
+
+| **Action** | **Command** |
+| --- | --- |
+| **Start Claude Code** | `claude` |
+| **Start in a specific folder** | `cd ~/my-folder && claude` |
+| **Check Claude Code version** | `claude --version` |
+
+---
+
+# CLAUDE.md — Teaching Claude About *You*
+
+One of Claude Code's most powerful features is the **CLAUDE.md** file. Think of it as Claude's **persistent memory** — a place where you store instructions that Claude should always remember, no matter what you're working on.
+
+### Global CLAUDE.md
+
+Create a file at `~/.claude/CLAUDE.md` (the global config). This applies **every time** you open Claude Code, regardless of which folder you're in.
+
+Here's a real example:
 
 ```markdown
-# My Claude Configuration
+# About Me
+- My name is Lucas
+- I'm an AI Engineer based in Lisbon
+- I teach courses on AI agents and prompt engineering
 
-- My Obsidian vault is located at: ~/obsidian-vault/
-- My Anki deck is stored here: ~/Library/Application Support/Anki2/User 1/
-- My automation scripts go in: ~/Desktop/automated/
-- When creating calendar events, use .ics files
+# My File System
+- My Obsidian vault: ~/Documents/obsidian-vault/
+- My Anki database: ~/Library/Application Support/Anki2/
+- My automations folder: ~/automations/
+
+# Preferences
+- Always write in clear, concise language
+- Use markdown formatting for notes
+- When creating files, use descriptive filenames with dates
 ```
 
-[Screenshot: Example CLAUDE.md file in VS Code]
+Now, whenever you say *"save this note to my vault"*, Claude already knows where your vault is. No need to repeat yourself. Ever.
 
-### Project-Level Configuration
+### Project-Specific CLAUDE.md
 
-Create a `CLAUDE.md` in any project folder for **project-specific instructions**:
+You can also create a `CLAUDE.md` in any folder. These **local configs** extend or override the global settings. This is perfect for project-specific instructions:
 
 ```markdown
-# Project: E-commerce App
-
-## Tech Stack
-- React + TypeScript
-- Tailwind CSS
-- Supabase backend
-
-## Coding Standards
-- Use functional components
-- Prefer named exports
-- Run tests before committing
+# Project: IronHack Workshop
+- All output files go in ./output/
+- Use Portuguese for any student-facing materials
+- Brand colors: #FF6B35 (orange), #1A1A2E (dark blue)
 ```
 
-> **Pro Tip:** Build your CLAUDE.md gradually. Every time you find yourself repeating instructions to Claude, add them to the file.
+**The takeaway:** CLAUDE.md is how you train Claude about your personal ecosystem. The more you invest in it, the less you repeat yourself and the smarter Claude becomes about *your* world.
 
-## Quick Demo: Your First Claude Code Task
+---
+
+# Quick Example: Your First Task
+
+All right, let's get our hands dirty.
+
+Open Claude Code in any folder and try this:
 
 ```
-Create a simple CSV file with 5 famous programming languages,
-their creation year, and creator name.
+Create a markdown file called "meeting-notes.md" with today's date
+as the title, sections for Attendees, Agenda, Discussion, and
+Action Items. Save it in the current folder.
 ```
 
 Claude will:
-1. Generate the data
-2. Ask permission to create the file
-3. Save it to your current directory
+1. Generate the file with proper structure
+2. Ask for your permission to create it
+3. Save it exactly where you told it to
+
+That's it. You just used an AI agent to create a structured document in seconds. Now imagine scaling that to hundreds of notes, research reports, and presentations.
+
+Try another one:
+
+```
+Fetch the contents of this URL: https://arxiv.org/abs/2503.10622
+and create a summary note with the key findings.
+```
+
+Claude Code will fetch the content, process it, and create the file — all while asking for your permission before taking actions.
 
 ---
 
-# Section 2: Productivity Tasks Demo
+# Managing Context — The Most Important Concept
 
-**Time: 15 minutes**
+This is the section that will **make or break** your experience with Claude Code (and honestly, with any AI tool). **Context management** is what separates someone who gets mediocre results from someone who gets incredible ones.
 
-Let's see Claude Code handle real productivity tasks — no coding required.
+Even experienced developers get this wrong. So pay attention — this is your superpower.
 
----
+## What Are Tokens and the Context Window?
 
-## Demo 1: Spreadsheet Generation
+Every AI model works with **tokens** — small chunks of text (roughly 3/4 of a word). When you chat with Claude Code, **everything** takes up tokens:
 
-**The prompt:**
+- Your messages → tokens
+- Claude's responses → tokens
+- Files Claude reads → tokens
+- The CLAUDE.md file → tokens
+- Previous conversation history → tokens
 
-```
-Create a CSV file with sample sales data for Q1 2025.
-Include columns: Date, Product, Quantity, Revenue, Region.
-Generate 20 rows of realistic sample data.
-Save it as sales-q1-2025.csv
-```
+All of this lives inside a **context window** — think of it as Claude's short-term working memory. Claude has a large context window (around 200K tokens), but it's **not infinite**. Once the window fills up, older information starts getting pushed out, and Claude's performance degrades.
 
-[Screenshot: Claude Code creating the CSV file]
+### The Desk Analogy
 
-**What Claude does:**
-- Generates realistic, varied data
-- Formats dates properly
-- Calculates plausible revenue based on quantity
-- Creates the file with proper CSV formatting
+Imagine your desk. You can spread out papers, books, and notes — but the desk has a fixed size. If you pile too much on it, things fall off the edges, and you can't find what you need anymore.
 
-> **Beyond basic:** Try asking Claude to create Excel files with multiple sheets, formulas, and formatting using the `openpyxl` library.
-
-### Variations to try:
+That's the context window. And **you** are responsible for what goes on that desk.
 
 ```
-Create a budget spreadsheet with monthly expenses,
-automatic totals, and highlight cells over $500.
+┌─────────────────────────────────────────────┐
+│           CONTEXT WINDOW (~200K tokens)       │
+│                                               │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────┐ │
+│  │ CLAUDE.md│ │ Your     │ │ Claude's     │ │
+│  │ config   │ │ messages │ │ responses    │ │
+│  └──────────┘ └──────────┘ └──────────────┘ │
+│  ┌──────────┐ ┌──────────┐                   │
+│  │ Files    │ │ Convo    │  ← stuff falls   │
+│  │ read     │ │ history  │    off here!     │
+│  └──────────┘ └──────────┘                   │
+└─────────────────────────────────────────────┘
 ```
 
-```
-Convert this JSON data to a formatted Excel file
-with a summary sheet and charts.
-```
+### Why This Matters for You
 
----
+Every task you give Claude Code has a **context cost**. When you say *"read all the files in my vault"*, Claude is loading potentially thousands of tokens into its working memory. If you then ask it to also write a report, create flashcards, AND organize your calendar — all in the same session — you're stacking context on top of context.
 
-## Demo 2: PDF Handouts with Brand Guidelines
+The result? Claude starts "forgetting" things from earlier in the conversation. Its responses get less precise. It might hallucinate or contradict earlier statements.
 
-Now let's create professional PDF documents that follow brand guidelines.
+### Context Management Commands
 
-**The setup:** I have a brand guidelines PDF that defines my visual identity — colors, fonts, spacing, borders.
+| **Action** | **Command** |
+| --- | --- |
+| **Check context usage** | `/cost` |
+| **Clear conversation** | `/clear` |
+| **Compact context** | `/compact` |
+| **Start fresh session** | Exit and run `claude` again |
 
-**The prompt:**
+## How to Think About Context When Instructing an Agent
 
-```
-Create a PDF cheatsheet about "5 Essential Git Commands"
-Use my brand guidelines document for styling.
-Make it clean, scannable, and ready to share on social media.
-```
+Here's the key mental model: **every instruction you give has a context footprint**. Your job is to be intentional about what goes into Claude's working memory.
 
-[Screenshot: Generated PDF handout with brand styling]
+Think of each task as a **weight** you're placing on the desk. Some tasks are light (a quick question), some are heavy (reading 50 files). You need to plan your desk space.
 
-### How It Works
-
-Claude Code can reference your brand guidelines document and apply:
-
-| Element | Brand Standard |
-|---------|----------------|
-| Background | Warm Cream (#F5F3EB) |
-| Text | Ink Black (#000000) |
-| Accents | Coral, Golden, Sage, Sky |
-| Borders | 2px solid black, sharp corners |
-| Fonts | IBM Plex Sans, JetBrains Mono |
-
-> **Key Feature:** The `pdf-handout-creator` skill bundles a Python script that generates PDFs following these exact standards — every time.
-
-### Live Demo
-
-Using the `/pdf-handout-creator` skill:
+### Bad: Context-Wasteful Prompting
 
 ```
-/pdf-handout-creator Create a cheatsheet about Claude Code
-keyboard shortcuts and essential commands
+Read all 200 notes in my vault, then find the ones about machine
+learning, then summarize them, then create flashcards from the
+summaries, then organize the flashcards by difficulty.
 ```
 
-[Screenshot: PDF being generated and opened]
+This is asking Claude to hold everything in memory at once. By the time it gets to creating flashcards, it's already forgotten details from the first notes it read. It's like asking someone to hold 200 papers in their hands while also writing a report. Things *will* fall.
 
----
+### Good: Context-Aware Prompting
 
-## Demo 3: Presentation Slides with Remark.js
+Break it into focused sessions:
 
-For presentations, I use **Remark.js** — an open-source framework that creates HTML-based slides from markdown.
-
-**Why Remark.js?**
-- Single HTML file (no dependencies)
-- Markdown-based (easy to write)
-- Customizable with CSS
-- Works in any browser
-- Exports to PDF
-
-**The prompt:**
-
+**Session 1: Scout**
 ```
-Create a 10-slide Remark.js presentation about
-"Getting Started with Claude Code" including:
-- Title slide
-- What is Claude Code
-- Installation
-- CLAUDE.md configuration
-- 3 practical examples
-- Best practices
-- Resources
-
-Include speaker notes and code examples.
+Search my vault for notes related to machine learning.
+List just the filenames and a one-line summary of each.
 ```
 
-[Screenshot: Remark.js slides in browser]
+**Session 2: Process**
+```
+Read these 5 specific notes: [list from session 1].
+Create a summary document and save it as ml-summary.md.
+```
 
-### How the Skill Works
+**Session 3: Create**
+```
+Based on the file ml-summary.md, create 10 Anki flashcards.
+```
 
-The `remark-slides-skill` accepts a markdown instructions file:
+Each session gets a fresh, focused context. The **output of one session becomes the clean input for the next**. Files are the bridge between sessions — not conversation history.
+
+## Compressing Instructions Through Smart Prompting
+
+One of the most powerful techniques is **instruction compression** — getting more done with fewer tokens. This is what separates a good AI user from a great one.
+
+### 1. Front-Load Context in CLAUDE.md
+
+Instead of explaining your preferences every time, put them in CLAUDE.md **once**:
 
 ```markdown
-# Presentation: Getting Started with Claude Code
-
-## Introduction
-- What is Claude Code?
-- Why use it for productivity?
-
-## Installation
-- npm install command
-- Screenshot: ./assets/terminal-install.png
-
-## Configuration
-- CLAUDE.md system
-- Reference: https://docs.anthropic.com/claude-code
-
-## Examples
-- PDF resource: ./docs/examples.pdf
+# Note Format
+- Always use H2 headers for sections
+- Include a "Source" field at the bottom
+- Use ISO dates (YYYY-MM-DD)
+- Tags go at the top in YAML frontmatter
 ```
 
-Each line becomes an executable instruction — URLs are fetched, images are included, PDFs are processed.
+Now instead of a 50-word instruction, you just say: *"Create a note about transformers."* Claude already knows your format. You just saved 40+ tokens.
 
-[Screenshot: Sample presentation open in browser]
+### 2. Use Reference Files Instead of Inline Instructions
 
-> **Pro Tip:** Press `p` during presentation for presenter mode with notes. Press `c` to clone the view for a second monitor.
+Instead of pasting a long style guide into your prompt:
+
+```
+Read the file ./brand-guidelines.md and follow those rules
+when creating the PDF handout.
+```
+
+The file is loaded once. Much more efficient than repeating rules in every single prompt.
+
+### 3. Create Commands for Repeated Patterns
+
+If you find yourself writing the same type of instruction over and over, compress it into a **custom command**:
+
+```
+/anki-cards https://some-article-url.com
+```
+
+One line replaces a paragraph of instructions. We'll cover how to build these soon.
+
+### 4. Be Specific, Not Exhaustive
+
+```
+# Bad — Wasteful (47 tokens)
+"I want you to create a note. The note should be in markdown.
+It should have a title. The title should be descriptive.
+It should have sections. The sections should be..."
+
+# Good — Compressed (12 tokens)
+"Create a markdown note following my vault format about [topic]."
+```
+
+Claude already knows your format from CLAUDE.md. **Trust the configuration.**
+
+## The Golden Rule of Context
+
+**One task, one session, one focus.**
+
+If you're doing research → fresh session for research.
+If you're creating flashcards → fresh session for flashcards.
+If you're organizing notes → fresh session for organizing.
+
+Connect them through **files**, not through conversation history. This is the single most important thing you'll learn today.
 
 ---
 
-# Section 3: Claude Code Skills Deep Dive
+# Skills, Workflows & Examples
 
-**Time: 15 minutes**
-
-Now let's understand **how** these productivity workflows work — and how to create your own.
-
----
+Now let's get to the fun stuff.
 
 ## What Are Skills?
 
-Skills are **modular packages** that extend Claude's capabilities with:
+Claude Skills are **reusable instruction packages** — organized folders of instructions, scripts, and resources that Claude can load dynamically. Think of them as **recipes** that Claude follows to produce consistent, high-quality results.
 
-1. **Specialized workflows** — Multi-step procedures for specific tasks
-2. **Tool integrations** — Instructions for working with file formats or APIs
-3. **Domain expertise** — Company-specific knowledge, schemas, business logic
-4. **Bundled resources** — Scripts, references, and assets
+Unlike regular prompts, skills work through **prompt expansion**: when you invoke a skill, Claude loads a markdown file (SKILL.md), expands it into detailed instructions, and uses those to guide its work. Skills prepare Claude to solve a problem rather than solving it directly.
 
-> **Key Concept:** Skills work through **prompt expansion**. When you invoke a skill, Claude loads a markdown file (SKILL.md) that modifies how it processes your request.
-
-As [Lee Hanchung's deep dive](https://hanchung.dev/claude-skills-deep-dive) explains:
-
-> "Skills prepare Claude to solve a problem rather than solving it directly."
-
----
-
-## Anatomy of a Skill
-
-Every skill lives in `~/.claude/skills/` and follows this structure:
+### Anatomy of a Skill
 
 ```
 my-skill/
-├── SKILL.md          # Required: Main instructions
-├── scripts/          # Optional: Executable code
-│   └── process.py
-├── references/       # Optional: Documentation
-│   └── api-docs.md
-└── assets/           # Optional: Templates, images
-    └── template.html
+├── SKILL.md          ← the "recipe" (main instructions)
+├── scripts/          ← executable scripts, if needed
+├── references/       ← example outputs, documentation
+└── assets/           ← templates, images, supporting files
 ```
 
-[Screenshot: Skill folder structure in Finder/VS Code]
-
-### The SKILL.md File
-
-This is the brain of every skill. It tells Claude:
-
+The SKILL.md file tells Claude:
 - **What** the skill does
 - **When** to use it
 - **How** to execute it
-- **Where** to find resources
+- **What format** to use for output
+- **Which tools** to employ
 
-```yaml
----
-name: pdf-handout-creator
-description: Create brand-aligned PDF handouts following
-  Automata Learning Lab design guidelines.
----
-
-# PDF Handout Creator Skill
-
-## When to Use This Skill
-Use this skill when the user requests:
-- Creating a PDF handout or cheatsheet
-- Generating a downloadable resource
-- Making a quick reference guide
-
-## How to Execute
-1. Parse the user's content request
-2. Structure into sections
-3. Run scripts/create-handout.py
-4. Open the generated PDF
-
-## Brand Guidelines Applied
-- Background: Warm Cream (#F5F3EB)
-- Text: Ink Black (#000000)
-- Borders: 2px solid black, sharp corners
-...
-```
-
----
-
-## Skills vs. Commands
-
-Claude Code offers two ways to create reusable workflows:
-
-| Feature | Commands | Skills |
-|---------|----------|--------|
-| Location | `~/.claude/commands/` | `~/.claude/skills/` |
-| Format | Single `.md` file | Folder with resources |
-| Complexity | Simple prompts | Complex workflows |
-| Resources | None | Scripts, assets, references |
-| Use case | Quick shortcuts | Sophisticated workflows |
-
-### Example Command (`~/.claude/commands/anki-cards.md`)
+### Example: Anki Card Creator Skill
 
 ```markdown
+# Anki Card Creator Skill
+
+## Purpose
+Create Anki flashcards from content and save to the Anki database.
+
+## When to Use
+- When the user asks to create flashcards
+- When reviewing notes that should be memorized
+
+## Output Format
+CSV format with fields: Front, Back, Source
+
+## Execution
+Run the bundled Python script: scripts/createankicards.py
+
+## Database Location
+/Users/user/Library/Application Support/Anki2/User 1/collection.anki2
+```
+
+## What Are Custom Commands?
+
+Commands are simpler than skills — they're **prompt templates** that you invoke with `/command-name`. Think of them as keyboard shortcuts for your most common instructions.
+
+You save them as `.md` files in `.claude/commands/`:
+
+```markdown
+# /anki-cards
+
 Create Anki flashcards from this content.
 
 Output format: CSV with Front, Back, Source fields.
@@ -369,270 +371,188 @@ Output format: CSV with Front, Back, Source fields.
 Rules:
 - Create 10-15 cards
 - Use clear, concise questions
-- Include source URLs
+- Include source URLs or file paths
 - Save to: ~/Desktop/anki_import.csv
 ```
 
-Invoke with: `/anki-cards [content or URL]`
+Now you just type `/anki-cards [URL or content]` and it works. Every single time.
 
-### Example Skill
+### Skills vs. Commands
 
-The `pdf-handout-creator` skill includes:
-- SKILL.md with detailed instructions
-- `create-handout.py` script for PDF generation
-- Brand guidelines reference
-- Output file naming conventions
-
----
-
-## Meta-Demo: Creating Skills with Claude
-
-Here's where it gets meta — we'll use Claude Code to create a new skill.
-
-**The prompt:**
-
-```
-Create a Claude Code skill called "meeting-notes-summarizer"
-that takes raw meeting notes and outputs:
-1. Action items with owners
-2. Key decisions made
-3. Follow-up questions
-4. Summary paragraph
-
-Include a Python script that formats the output as markdown.
-```
-
-[Screenshot: Claude creating the skill folder structure]
-
-### What Claude Creates
-
-```
-meeting-notes-summarizer/
-├── SKILL.md
-│   ├── name: meeting-notes-summarizer
-│   ├── description: ...
-│   ├── When to use
-│   ├── Output format
-│   └── Script reference
-├── scripts/
-│   └── format-notes.py
-└── references/
-    └── output-template.md
-```
-
-### The Skill Creator Skill
-
-For more complex skills, use the `skill-creator` skill:
-
-```
-/skill-creator I want to create a skill that generates
-weekly status reports from my git commits and calendar events
-```
-
-This meta-skill guides you through:
-1. Understanding the skill with concrete examples
-2. Planning reusable contents
-3. Initializing the skill structure
-4. Editing SKILL.md
-5. Packaging for distribution
-
-> **Mind-bending:** You're using a skill to create skills. This is Claude Code's extensibility model in action.
+| | **Commands** | **Skills** |
+|---|---|---|
+| **Complexity** | Simple prompt templates | Multi-file workflows with scripts |
+| **Use case** | Quick, repeatable tasks | Sophisticated, deterministic workflows |
+| **Setup** | One markdown file | Folder with SKILL.md + assets |
+| **Example** | `/anki-cards` | Research report generator with citations |
 
 ---
 
-## Sharing Skills
+# Live Demo: Translate a Paper
 
-Skills can be shared as zip files:
+Let's see Claude Code in action with a real-world task. We'll take a research paper (PDF) and ask Claude to translate and summarize it.
 
-```bash
-# Package a skill for distribution
-scripts/package_skill.py path/to/my-skill
-
-# Creates: my-skill.zip
+```
+Read the PDF file ./paper.pdf. Create a translated summary
+in Portuguese with the key findings, methodology, and conclusions.
+Save it as ./paper-summary-pt.md
 ```
 
-Recipients extract to `~/.claude/skills/` and immediately have access.
+Claude will:
+1. Read the PDF content
+2. Extract the key sections
+3. Translate to Portuguese
+4. Structure it as a clean markdown document
+5. Save the file
 
-Check out [awesome-claude-skills](https://github.com/anthropics/awesome-claude-code) for community-created skills.
+This is the kind of task that would take a human 30-60 minutes. Claude does it in under a minute. And you didn't write a single line of code.
 
 ---
 
-# Section 4: Practical Workflows & Wrap-up
+# Meta: Using Claude to Create Skills (The Skill Creator)
 
-**Time: 10 minutes**
+Here's where it gets meta (and magical): **you can ask Claude Code to create skills for itself**.
 
-Let's connect everything into practical workflows you can use daily.
+```
+Create a skill that takes a PDF research paper, extracts the key
+findings, translates them to Portuguese, and saves the output as
+a structured markdown file. Put the skill in .claude/skills/translate-paper/
+```
+
+Claude will:
+1. Create the skill folder structure
+2. Write the SKILL.md with detailed instructions
+3. Create any helper scripts if needed
+4. Install it so you can use it immediately
+
+You just created a reusable automation without writing any code. Next time, you just invoke the skill instead of explaining the whole workflow again.
+
+That's the meta-level magic: **the agent builds its own tools**.
 
 ---
 
-## Workflow 1: The Single Note System
+# Anki Flashcard Skills — Study, Learn, Memorize
 
-Inspired by [Andrej Karpathy's workflow](https://twitter.com/karpathy/status/1850943658283823104):
+One of the most brilliant use cases: turning **any** content into spaced-repetition flashcards.
 
-1. **Capture** everything in one `note.md` file
-2. **Review** daily with Claude's help
-3. **Extract** important items into permanent notes, flashcards, projects
+### From Notes to Flashcards
 
 ```
-Review my note.md file and:
-1. Identify any action items I should tackle today
-2. Find ideas worth converting to permanent notes
-3. Suggest any redundant or outdated entries to remove
+Read my notes about prompt engineering in my vault.
+Create 10 Anki flashcards and save them as a CSV file
+I can import into Anki.
 ```
 
-Claude acts as a **cognitive layer** — you do the thinking, Claude handles the organizing.
+### From Web Articles to Flashcards
+
+Using a custom command:
+
+```
+/anki-cards https://some-great-article.com/about-ai-agents
+```
+
+Claude fetches the article, extracts the key concepts, generates well-structured Q&A flashcards, and saves them ready for import.
+
+### From Research Papers to Flashcards
+
+```
+Read ./paper.pdf and create flashcards focusing on the
+methodology and key findings. Include page references.
+```
+
+**Important caveat:** Creating flashcards automatically is convenient, but for deep learning, you should still read the source material and engage with it critically. Claude Code accelerates the process — it doesn't replace the thinking.
 
 ---
 
-## Workflow 2: Research with Verifiable Citations
+# Skills Unlock Automation for Non-Devs
 
-Combat AI hallucinations with deep-linked citations:
+This is the paradigm shift. Traditionally, automation required programming — Python scripts, cron jobs, API configurations. With Claude Code skills:
 
-```
-Create a research report about "best practices for React
-performance optimization" using these sources:
-- https://react.dev/learn/render-and-commit
-- https://kentcdodds.com/blog/usememo-and-usecallback
+- **No code required** — skills are written in markdown (plain English instructions)
+- **No setup overhead** — Claude handles file operations, API calls, and data processing
+- **No maintenance burden** — update the SKILL.md file and the workflow updates
 
-For each claim, include a text fragment link that
-jumps directly to the supporting passage.
-```
+| **Traditional Automation** | **Claude Code Skills** |
+|---|---|
+| Write a Python script | Write a paragraph in English |
+| Debug the code | Refine the instructions |
+| Install dependencies | Claude handles it |
+| Set up a scheduler | Invoke the skill when needed |
+| Maintain the codebase | Update the SKILL.md |
 
-The output includes links like:
-```
-https://react.dev/learn#:~:text=React%20only%20changes
-```
-
-When clicked, the browser scrolls to and highlights that exact text.
+This is like the difference between learning to cook from scratch vs. having a chef who follows your recipe. You still design the meal — you just don't have to chop the onions anymore.
 
 ---
 
-## Workflow 3: Content Creation Pipeline
+# The Compound Effect — No Technical Ability Required
 
-From research to polished output:
+Let's zoom out and see the full picture of what we covered:
 
-```
-1. Read my notes on [topic] from Obsidian
-2. Create an outline for a blog post
-3. Generate a presentation using remark-slides-skill
-4. Create a PDF handout using pdf-handout-creator
-5. Draft 3 LinkedIn post variations
-```
+1. **Claude Code** → An AI agent on your machine
+2. **CLAUDE.md** → Persistent memory and preferences
+3. **Context management** → Smart, focused prompting
+4. **Skills & commands** → Reusable automation packages
+5. **Real workflows** → Translation, flashcards, research
 
-All outputs maintain **brand consistency** because the skills reference the same guidelines.
+Each of these individually is useful. Together, they **compound** into something much bigger.
 
----
+**The compound effect is real.** Every skill you create saves you time *every single time you use it*. Build 10 skills, and you've automated 10 recurring workflows. Build 50, and you've essentially created a **personal operating system** powered by AI — and you never wrote a line of code.
 
-## Best Practices Recap
+The workflows we covered barely scratch the surface:
 
-| Practice | Why |
-|----------|-----|
-| Start simple | Build complexity gradually |
-| Build CLAUDE.md iteratively | Add instructions as you discover patterns |
-| Verify AI outputs | Use deep-linked citations |
-| Create skills for repeated tasks | If you do it 3+ times, make a skill |
-| Use multiple Claude instances | Keeps context clean |
-| Check community skills first | Don't reinvent the wheel |
+- Note-taking systems become dynamic knowledge graphs
+- Flashcard creation goes from tedious to instant
+- Research becomes verifiable with deep-linked citations
+- Content creation maintains brand consistency
+- Workflows crystallize into reusable skills
 
 ---
 
-## Resources
+# Claude Code: Your First Taste of a True General Personal Assistant
 
-### Official Documentation
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [Claude Code GitHub](https://github.com/anthropics/claude-code)
-- [Building Effective Agents](https://docs.anthropic.com/en/docs/agents)
+Claude Code is not just a tool. It's a **cognitive layer** between you and your work:
 
-### Deep Dives
-- [Claude Agent Skills Deep Dive](https://hanchung.dev/claude-skills-deep-dive) — Lee Hanchung
-- [Equipping Agents with Skills](https://www.anthropic.com/engineering/skills) — Anthropic Engineering
+- **You do the thinking**: reading, reflecting, deciding what's important
+- **Claude handles the operations**: creating files, organizing, connecting, formatting
+- **You verify and iterate**: checking outputs, refining workflows
 
-### Tools & Community
-- [Remark.js](https://remarkjs.com) — Markdown presentations
-- [Awesome Claude Skills](https://github.com/anthropics/awesome-claude-code) — Community skills
-- [Anki](https://apps.ankiweb.net) — Spaced repetition flashcards
+It's not about AI replacing thought — it's about **removing friction** from knowledge work so you can focus on the high-value cognitive tasks: understanding, synthesizing, and creating.
 
-### Learn More
-- [Introduction to Claude Code Course](https://automatalearninglab.thinkific.com) — Automata Learning Lab
-- [Lucas's Newsletter](https://automata-learning-lab.kit.com) — Weekly AI insights
+The future of productivity isn't about learning to code. It's about learning to **instruct, configure, and orchestrate** AI agents. And that's exactly what you just did today.
 
 ---
 
-## Q&A
+# Full Command Reference
 
-**Common questions:**
-
-**Q: Is Claude Code free?**
-A: Claude Code requires an Anthropic API key with usage-based pricing. There's also a Pro plan option.
-
-**Q: Can I use it offline?**
-A: No, it requires an internet connection to communicate with Claude's API.
-
-**Q: What about sensitive data?**
-A: Claude Code runs locally but sends prompts to Anthropic's API. Review their privacy policy for sensitive use cases.
-
-**Q: How is this different from ChatGPT?**
-A: Claude Code can execute actions on your machine — create files, run commands, manage your system. Chat interfaces are limited to conversation.
+| **Action** | **Command** |
+| --- | --- |
+| **Start Claude Code** | `claude` |
+| **Check context/cost** | `/cost` |
+| **Clear conversation** | `/clear` |
+| **Compact context** | `/compact` |
+| **Run a custom command** | `/command-name` |
+| **Check version** | `claude --version` |
+| **Start fresh session** | Exit + `claude` |
 
 ---
 
-## Thank You!
+# Resources
 
-**Take home:**
-- `example-skills/` — Working skills to install
-- `handout/claude-code-cheatsheet.pdf` — Quick reference
-- `demos/` — All prompts from today
-
-**Connect:**
-- Workshop repo: [GitHub link]
-- Questions: [Contact info]
+- [Claude Code Official Docs](https://docs.anthropic.com/en/docs/claude-code)
+- [Anthropic: Building Effective Agents](https://www.anthropic.com/research/building-effective-agents)
+- [Automata Learning Lab — Claude Code Course](https://automatalearninglab.thinkific.com)
+- [Anki — Spaced Repetition Flashcards](https://apps.ankiweb.net/)
+- [Obsidian — Markdown Note-Taking](https://obsidian.md/)
+- [Awesome Claude Skills](https://github.com/anthropics/awesome-claude-code) — Community-curated collection
 
 ---
 
-## Appendix: Demo Prompts Reference
+*In under 60 minutes*, you learned how to set up and configure an AI agent, manage its context like a pro, and create reusable automations — all without writing a single line of code.
 
-### Demo 1: Spreadsheet
-```
-Create a CSV file with sample sales data for Q1 2025.
-Include columns: Date, Product, Quantity, Revenue, Region.
-Generate 20 rows of realistic sample data.
-Save it as sales-q1-2025.csv
-```
+The skills you develop today — prompt engineering, context management, workflow design — will serve you well as these tools continue to evolve. This is what being "AI-native" looks like.
 
-### Demo 2: PDF Handout
-```
-Create a PDF cheatsheet about "5 Essential Git Commands"
-Use my brand guidelines document for styling.
-Make it clean, scannable, and ready to share on social media.
-```
-
-### Demo 3: Remark.js Slides
-```
-Create a 10-slide Remark.js presentation about
-"Getting Started with Claude Code" including:
-- Title slide
-- What is Claude Code
-- Installation
-- CLAUDE.md configuration
-- 3 practical examples
-- Best practices
-- Resources
-
-Include speaker notes and code examples.
-```
-
-### Demo 4: Skill Creation
-```
-Create a Claude Code skill called "meeting-notes-summarizer"
-that takes raw meeting notes and outputs:
-1. Action items with owners
-2. Key decisions made
-3. Follow-up questions
-4. Summary paragraph
-
-Include a Python script that formats the output as markdown.
-```
+Now go build your first skill.
 
 ---
 
-*Workshop created for Ironhack by Lucas — Automata Learning Lab*
+*Ironhack Workshop — Automata Learning Lab*
